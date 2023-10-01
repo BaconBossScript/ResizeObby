@@ -1,0 +1,40 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "BaconBoss Hub | Resize Obby! ⭐", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+
+getgenv().tpPlace = "string"
+
+function Teleport(teleportPlace)
+    local player = game.Players.LocalPlayer
+    player.Character.HumanoidRootPart.CFrame = teleportPlace
+end
+
+
+local TpTab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+_G.ez = true
+function ez()
+     while _G.ez == true do 
+        for i = game.Players.LocalPlayer.leaderstats.Stage.Value, 100 do
+            local part = game.Workspace["Stages"][tostring(i)]
+            if part and part:IsA("BasePart") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = part.CFrame
+                task.wait()
+            end
+        end
+     wait(0.5)
+    end
+end
+
+TpTab:AddToggle({
+	Name = "Auto Obby",
+	Default = false,
+	Callback = function(Value)
+		_G.ez = Value
+        ez()
+	end    
+})
